@@ -34,8 +34,4 @@ def check_transitive_closure(matrix: list) -> bool:
     '''
     warshall_matrix = warshall_algorithm(matrix)
 
-    if matrix == warshall_matrix:
-        return True
-
-    return False
-    
+    return matrix == warshall_matrix
