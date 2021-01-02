@@ -16,8 +16,7 @@ def reflexive_closure(matrix: list) -> list:
     [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
     """
     for ind, elem in enumerate(matrix):
-        if elem[ind] == 0:
-            elem[ind] = 1
+        elem[ind] = 1
     return matrix
 
 
