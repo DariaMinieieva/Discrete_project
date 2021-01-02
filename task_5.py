@@ -132,7 +132,6 @@ def find_equivalence_classes(matrix: list) -> list:
  [0, 0, 1, 1, 0], [0, 0, 0, 0, 1]])
     [['a', 'b'], ['c', 'd'], ['e']]
     """
-    matrix.sort(reverse=True)
     matrix_indexes = find_indexes(matrix)
     all_elements, unique_elements = find_matrix_elements(matrix_indexes)
     tuples_list = find_elements_amount(all_elements, unique_elements)
