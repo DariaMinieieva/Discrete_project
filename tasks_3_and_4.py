@@ -32,6 +32,6 @@ def check_transitive_closure(matrix: list) -> bool:
     >>> check_transitive_closure([[1, 0, 1, 1], [1, 0, 1, 1], [1, 0, 1, 1], [1, 0, 1, 1]])
     True
     '''
-    warshall_matrix = warshall_algorithm(matrix)
+    return matrix == warshall_algorithm(matrix)
 
-    return matrix == warshall_matrix
+     
