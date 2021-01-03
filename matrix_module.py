@@ -13,7 +13,7 @@ def read_file(path: str) -> list:
     """
     with open(path) as matrix_file:
         matrix = matrix_file.read().splitlines()
-    matrix = [i.split(',') for i in matrix]
+    matrix = [i.split(' ') for i in matrix]
     matrix = [list(map(int, i)) for i in matrix]
     return matrix
 
@@ -95,7 +95,21 @@ def check_transitive_closure(matrix: list) -> bool:
     >>> check_transitive_closure([[1, 0, 1, 1], [1, 0, 1, 1], [1, 0, 1, 1], [1, 0, 1, 1]])
     True
     '''
-    return matrix == warshall_algorithm(matrix)
+    copy_matrix = deepcopy(matrix)
+    m_len = len(copy_matrix)
+
+    for i in range(m_len):
+        for j in range(m_len):
+            if (i != j) and (copy_matrix[j][i] == 1):
+                for k in range(m_len):
+                    # if at least one 0 will be changed - it is not transitive closure
+                    if copy_matrix[j][k] == 0  and copy_matrix[i][k] == 1:
+                        return False
+                    
+                    # 1 == 1 and 0 == 0 in binary so binary OR can be used here
+                    copy_matrix[j][k] = copy_matrix[j][k] | copy_matrix[i][k]
+
+    return True
 
 def find_indexes(matrix: list) -> list:
     """
