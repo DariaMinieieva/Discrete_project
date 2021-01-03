@@ -13,7 +13,7 @@ def read_file(path: str) -> list:
     """
     with open(path) as matrix_file:
         matrix = matrix_file.read().splitlines()
-    matrix = [i.split(' ') for i in matrix]
+    matrix = [i.split() for i in matrix]
     matrix = [list(map(int, i)) for i in matrix]
     return matrix
 
