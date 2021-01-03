@@ -13,7 +13,7 @@ def read_file(path: str) -> list:
     """
     with open(path) as matrix_file:
         matrix = matrix_file.read().splitlines()
-    matrix = [i.split(' ') for i in matrix]
+    matrix = [i.split(',') for i in matrix]
     matrix = [list(map(int, i)) for i in matrix]
     return matrix
 
@@ -23,7 +23,7 @@ def write_file(matrix: list, path='matrix.csv'):
     Write given matrix to a file.
     """
     matrix = [list(map(str, i)) for i in matrix]
-    matrix = [' '.join(i) + '\n' for i in matrix]
+    matrix = [','.join(i) + '\n' for i in matrix]
     with open(path, 'w') as matrix_file:
         matrix_file.writelines(matrix)
 
