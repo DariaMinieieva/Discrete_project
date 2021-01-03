@@ -107,7 +107,7 @@ def check_transitive_closure(matrix: list) -> bool:
                     # if at least one 0 will be changed - it is not transitive closure
                     if copy_matrix[j][k] == 0  and copy_matrix[i][k] == 1:
                         return False
-                    
+
                     # 1 == 1 and 0 == 0 in binary so binary OR can be used here
                     copy_matrix[j][k] = copy_matrix[j][k] | copy_matrix[i][k]
 
@@ -118,20 +118,19 @@ def find_indexes(matrix: list) -> list:
     """
     Convert boolean matrix to the list of tuples.
     >>> find_indexes([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
-    [('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'b'), ('b', 'c'),\
- ('c', 'a'), ('c', 'b'), ('c', 'c')]
+    [('a0', 'a0'), ('a0', 'a1'), ('a0', 'a2'), ('a1', 'a0'), ('a1', 'a1'), ('a1', 'a2'),\
+('a2', 'a0'), ('a2', 'a1'), ('a2', 'a2')]
     >>> find_indexes([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
     []
     >>> find_indexes([[1, 0, 0], [0, 0, 0], [0, 0, 1]])
-    [('a', 'a'), ('c', 'c')]
+    [('a0', 'a0'), ('a2', 'a2')]
     """
-    all_letters = 'abcdefghijklmnopqrstuvwxyz'
     indexes_list = []
     for row_index, lst in enumerate(matrix):
         for column_index, element in enumerate(lst):
             if element == 1:
                 indexes_list.append(
-                    (all_letters[row_index], all_letters[column_index]))
+                    ('a' + str(row_index), 'a' + str(column_index)))
     return indexes_list
 
 
@@ -233,19 +232,18 @@ def find_equivalence_classes(matrix: list) -> list:
     """
     Find equivalence classes by the boolean matrix.
     >>> find_equivalence_classes([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
-    [['a', 'b', 'c']]
+    [['a0', 'a1', 'a2']]
     >>> find_equivalence_classes([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
     []
     >>> find_equivalence_classes([])
     []
     >>> find_equivalence_classes([[1, 0, 0], [0, 0, 0], [0, 0, 1]])
-    [['a'], ['c']]
+    [['a0'], ['a2']]
     >>> find_equivalence_classes([[1, 1, 0, 0, 0], [1, 1, 0, 0, 0], [0, 0, 1, 1, 0],\
  [0, 0, 1, 1, 0], [0, 0, 0, 0, 1]])
-    [['a', 'b'], ['c', 'd'], ['e']]
+    [['a0', 'a1'], ['a2', 'a3'], ['a4']]
     """
-    copy_matrix = deepcopy(matrix)
-    matrix_indexes = find_indexes(copy_matrix)
+    matrix_indexes = find_indexes(matrix)
     all_elements, unique_elements = find_matrix_elements(matrix_indexes)
     tuples_list = find_elements_amount(all_elements, unique_elements)
     return find_all_classes(tuples_list)
