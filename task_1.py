@@ -11,7 +11,7 @@ def read_file(path: str) -> list:
     """
     with open(path) as matrix_file:
         matrix = matrix_file.read().splitlines()
-    matrix = [i.split(',') for i in matrix]
+    matrix = [i.split() for i in matrix]
     matrix = [list(map(int, i)) for i in matrix]
     return matrix
 
@@ -20,6 +20,13 @@ def write_file(matrix: list, path='matrix.csv'):
     """
     Write given matrix to a file.
     """
-    matrix = [','.join(i) + '\n' for i in matrix]
+    matrix = [' '.join(i) + '\n' for i in matrix]
     with open(path, 'w') as matrix_file:
         matrix_file.writelines(matrix)
+
+
+if __name__ == "__main__":
+    import time
+    start = time.time()
+    read_file('rel_1500_0.45.csv')
+    print(time.time() - start, 'seconds')
