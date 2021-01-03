@@ -23,9 +23,10 @@ def write_file(matrix: list, path='matrix.csv'):
     Write given matrix to a file.
     """
     matrix = [list(map(str, i)) for i in matrix]
-    matrix = [','.join(i) + '\n' for i in matrix]
+    matrix = [' '.join(i) + '\n' for i in matrix]
     with open(path, 'w') as matrix_file:
         matrix_file.writelines(matrix)
+
 
 def reflexive_closure(matrix: list) -> list:
     """
@@ -42,8 +43,7 @@ def reflexive_closure(matrix: list) -> list:
     copy_matrix = deepcopy(matrix)
 
     for ind, elem in enumerate(copy_matrix):
-        if elem[ind] == 0:
-            elem[ind] = 1
+        elem[ind] = 1
     return copy_matrix
 
 
@@ -67,6 +67,7 @@ def symmetric_closure(matrix: list) -> list:
                 copy_matrix[col_ind][row_ind] = 1
     return copy_matrix
 
+
 def warshall_algorithm(matrix: list) -> list:
     '''
     Return transitive closure of given matrix
@@ -85,6 +86,7 @@ def warshall_algorithm(matrix: list) -> list:
                     copy_matrix[j][k] = copy_matrix[j][k] | copy_matrix[i][k]
 
     return copy_matrix
+
 
 def check_transitive_closure(matrix: list) -> bool:
     '''
@@ -110,6 +112,7 @@ def check_transitive_closure(matrix: list) -> bool:
                     copy_matrix[j][k] = copy_matrix[j][k] | copy_matrix[i][k]
 
     return True
+
 
 def find_indexes(matrix: list) -> list:
     """
@@ -248,7 +251,7 @@ def find_equivalence_classes(matrix: list) -> list:
     return find_all_classes(tuples_list)
 
 
-def generate_fragment(lenght: int, fragment: list, counter: int = 0) -> list:
+def generate_fragment(length: int, fragment: list, counter: int = 0) -> list:
     '''
     Recursive function, which generates all binary strings
     and return list of these strings
@@ -257,13 +260,13 @@ def generate_fragment(lenght: int, fragment: list, counter: int = 0) -> list:
     >>> generate_fragment(2, [0, 0])
     [[0, 0], [0, 1], [1, 0], [1, 1]]
     '''
-    if counter == lenght:
+    if counter == length:
         return [fragment[:]]
 
     fragment[counter] = 0
-    fragment_list = generate_fragment(lenght, fragment, counter + 1)
+    fragment_list = generate_fragment(length, fragment, counter + 1)
     fragment[counter] = 1
-    fragment_list += generate_fragment(lenght, fragment, counter + 1)
+    fragment_list += generate_fragment(length, fragment, counter + 1)
     return fragment_list
 
 
