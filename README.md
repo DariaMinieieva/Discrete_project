@@ -46,9 +46,9 @@ find_indexes([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
 find_indexes([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
 []
 ```
-1. find_matrix_elements(matrix: list), find_elements_amount(all_elements: list, unique_elements: list) та find_all_classes(tuples_list: list) – допоміжні функції для знаходження класів еквівалентності, використовуючи списки кортежів.
+2. find_matrix_elements(matrix: list), find_elements_amount(all_elements: list, unique_elements: list) та find_all_classes(tuples_list: list) – допоміжні функції для знаходження класів еквівалентності, використовуючи списки кортежів.
 find_equivalence_classes(matrix: list) -> list
-1. Головна функція, що викликає усі попередні й у кінцевому випадку повертає список із усіх класів еквівалентності. Аргумент matrix – матриця, подана як список списків. 
+3. Головна функція, що викликає усі попередні й у кінцевому випадку повертає список із усіх класів еквівалентності. Аргумент matrix – матриця, подана як список списків. 
 ```
 find_equivalence_classes([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
 [['a0', 'a1', 'a2']]
@@ -72,7 +72,7 @@ count_of_transitive_relations(2)
 count_of_transitive_relations(3)
 171
 ```
-1. generate_fragment (length: int, fragment: list, counter: int = 0) -> list:
+2. generate_fragment (length: int, fragment: list, counter: int = 0) -> list:
 Допоміжна рекурсивна функція, що генерує усі можливі бінарні рядки розміром lenght та повертає список з ними
 ```
 generate_fragment(1, [0])
