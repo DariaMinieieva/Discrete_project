@@ -232,3 +232,56 @@ def find_equivalence_classes(matrix: list) -> list:
     all_elements, unique_elements = find_matrix_elements(matrix_indexes)
     tuples_list = find_elements_amount(all_elements, unique_elements)
     return find_all_classes(tuples_list)
+
+
+def generate_fragment(lenght: int, fragment: list, counter: int = 0) -> list:
+    '''
+    Recursive function, which generates all binary strings
+    and return list of these strings
+    >>> generate_fragment(1, [0])
+    [[0], [1]]
+    >>> generate_fragment(2, [0, 0])
+    [[0, 0], [0, 1], [1, 0], [1, 1]]
+    '''
+    if counter == lenght:
+        return [fragment[:]]
+
+    fragment[counter] = 0
+    fragment_list = generate_fragment(lenght, fragment, counter + 1)
+    fragment[counter] = 1
+    fragment_list += generate_fragment(lenght, fragment, counter + 1)
+    return fragment_list
+
+
+def count_of_transitive_relations(elements: int):
+    '''
+    Return count of all different transitive relations
+    >>> count_of_transitive_relations(0)
+    1
+    >>> count_of_transitive_relations(1)
+    2
+    >>> count_of_transitive_relations(2)
+    13
+    >>> count_of_transitive_relations(3)
+    171
+    >>> count_of_transitive_relations(-1)
+
+    '''
+    if elements < 0:
+        return None
+
+    matrix_list = [[]]
+    fragment_list = generate_fragment(elements, [0] * elements)
+
+    for row in range(elements):
+        new_list = []
+        for matrix in matrix_list:
+            for fragment in fragment_list:
+                check_matrix = matrix + [fragment]
+                if row == 0 or check_transitive_closure(check_matrix):
+                    new_list.append(check_matrix)
+
+        matrix_list = new_list
+        new_list = []
+
+    return len(matrix_list)
