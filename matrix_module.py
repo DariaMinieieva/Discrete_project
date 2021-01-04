@@ -13,7 +13,7 @@ def read_file(path: str) -> list:
     """
     with open(path) as matrix_file:
         matrix = matrix_file.read().splitlines()
-    matrix = [i.split(',') for i in matrix]
+    matrix = [i.split() for i in matrix]
     matrix = [list(map(int, i)) for i in matrix]
     return matrix
 
@@ -138,7 +138,7 @@ def find_classes(matrix: list) -> list:
     """
     Return list of equivalence classes on given matrix.
     >>> find_classes([[1, 1, 0, 0, 0], [1, 1, 0, 0, 0], [0, 0, 1, 1, 0],[0, 0, 1, 1, 0], [0, 0, 0, 0, 1]])
-    [['a1', 'a0'], ['a3', 'a2], ['a4']]
+    [['a0', 'a1'], ['a3', 'a2], ['a4']]
     >>> find_classes([[1, 1, 0], [1, 1, 0], [0, 0, 1]])
     [['a0', 'a1'], ['a2']]
     """
@@ -146,9 +146,8 @@ def find_classes(matrix: list) -> list:
     classes = []
     while relation != []:
         represent = relation[0][0]
-        eq_class = [i[1]
-                    for i in list(filter(lambda x: x[0] == represent, relation))]
-        classes.append(list(set(eq_class)))
+        eq_class = [i[1] for i in list(filter(lambda x: x[0] == represent, relation))]
+        classes.append(eq_class)
         for i in eq_class:
             relation = list(filter(lambda x: i not in x, relation))
     return classes
