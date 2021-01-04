@@ -145,7 +145,7 @@ def find_classes(matrix: list) -> list:
     relation = find_indexes(matrix)
     classes = []
     while relation != []:
-        represent = relation[0][0]
+        represent = relation[0][0] #a0 
         eq_class = [i[1] for i in list(filter(lambda x: x[0] == represent, relation))]
         classes.append(eq_class)
         for i in eq_class:
@@ -172,6 +172,7 @@ def generate_fragment(length: int, fragment: list, counter: int = 0) -> list:
     return fragment_list
 
 
+
 def count_of_transitive_relations(elements: int):
     '''
     Return count of all different transitive relations
@@ -194,13 +195,13 @@ def count_of_transitive_relations(elements: int):
 
     for row in range(elements):
         new_list = []
-        for matrix in matrix_list:
+        for matrix in matrix_list: #[]
             for fragment in fragment_list:
-                check_matrix = matrix + [fragment]
+                check_matrix = matrix + [fragment] #[]+[0, 0, 0]
                 if row == 0 or check_transitive_closure(check_matrix):
                     new_list.append(check_matrix)
 
         matrix_list = new_list
-        new_list = []
 
     return len(matrix_list)
+
